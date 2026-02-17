@@ -66,12 +66,16 @@ const allowedOrigins = (process.env.CORS_ORIGINS || '')
 
 const originList = allowedOrigins.length ? allowedOrigins : defaultOrigins;
 
+// Apply CORS to ALL requests including errors
 app.use(cors({
   origin: originList,
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
+
+// Handle preflight requests explicitly
+app.options('*', cors());
 
 app.use(express.json());
 
@@ -198,9 +202,16 @@ app.get('/debug/files', (req, res) => {
   });
 });
 
-// Global error handler
+// Global error handler - must set CORS headers for all error responses
 app.use((err, req, res, next) => {
   console.error('Unhandled error:', err);
+  
+  // Ensure CORS headers are set even for errors
+  res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+  
   res.status(500).json({
     success: false,
     message: 'Internal server error',

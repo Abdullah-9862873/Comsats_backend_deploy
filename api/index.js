@@ -6,15 +6,16 @@ const path = require('path');
 const debugFiles = () => {
   try {
     const rootDir = path.join(__dirname, '..');
+    console.log('Root directory:', rootDir);
     const files = fs.readdirSync(rootDir);
     console.log('Root directory files:', files);
     
     const routesDir = path.join(rootDir, 'routes');
     if (fs.existsSync(routesDir)) {
       const routeFiles = fs.readdirSync(routesDir);
-      console.log('Route files:', routeFiles);
+      console.log('Route files found:', routeFiles);
     } else {
-      console.log('Routes directory does not exist');
+      console.log('Routes directory does not exist at:', routesDir);
     }
   } catch (err) {
     console.error('Debug file listing error:', err);
@@ -27,23 +28,29 @@ let app;
 
 try {
   app = require('../app');
+  console.log('App loaded successfully');
 } catch (error) {
   console.error('Failed to load app:', error);
+  
+  // Return a fallback handler when app fails to load
   module.exports = async (req, res) => {
-    // Set CORS headers even for error responses
+    // Set CORS headers
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
     
+    // Handle preflight requests
     if (req.method === 'OPTIONS') {
-      return res.status(200).end();
+      res.status(200).end();
+      return;
     }
     
     return res.status(500).json({
       success: false,
       message: 'Server initialization failed',
       error: error.message,
-      stack: error.stack
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
     });
   };
   return;
@@ -55,16 +62,17 @@ module.exports = async (req, res) => {
   } catch (error) {
     console.error('Serverless function error:', error);
     
-    // Set CORS headers even for error responses
+    // Set CORS headers even for errors
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
     
     return res.status(500).json({
       success: false,
       message: 'Internal server error',
       error: error.message,
-      stack: error.stack
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
     });
   }
 };
