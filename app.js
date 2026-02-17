@@ -142,6 +142,7 @@ const loadRoute = (routePath) => {
 app.use('/api/auth', loadRoute('./routes/auth'));
 app.use('/api/admin', loadRoute('./routes/adminNew'));
 app.use('/api/jobs', loadRoute('./routes/jobs'));
+app.use('/api/internships', loadRoute('./routes/jobs')); // Alias for frontend compatibility
 app.use('/api/applications', loadRoute('./routes/applications'));
 app.use('/api/students', loadRoute('./routes/students'));
 app.use('/api/supervisors', loadRoute('./routes/supervisors'));
