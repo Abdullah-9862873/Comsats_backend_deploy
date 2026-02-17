@@ -13,13 +13,19 @@ const createUploadDirs = () => {
   ];
   
   dirs.forEach(dir => {
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
+    try {
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
+    } catch (err) {
+      // In serverless environments (like Vercel), filesystem is read-only
+      // This is expected and we can continue without creating directories
+      console.warn(`⚠️ Could not create directory ${dir}: ${err.message}`);
     }
   });
 };
 
-// Initialize upload directories
+// Initialize upload directories (silently fail in serverless)
 createUploadDirs();
 
 // Storage configuration for profile pictures
