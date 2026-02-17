@@ -102,7 +102,18 @@ app.use('/uploads', (req, res, next) => {
   }
 });
 
-// Health check endpoint shared by local and serverless deployments
+// Default root + health check endpoints shared by local and serverless deployments
+app.get('/', (req, res) => {
+  res.json({
+    status: 'OK',
+    message: 'Backend is running',
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || 'development',
+    healthEndpoint: '/health'
+  });
+});
+
 app.get('/health', (req, res) => {
   res.json({
     status: 'OK',
