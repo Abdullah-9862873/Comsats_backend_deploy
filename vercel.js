@@ -1,6 +1,7 @@
 const app = require('./app');
 
-module.exports = app;
+module.exports = (req, res) => app(req, res);
+
 module.exports.config = {
   api: {
     bodyParser: {
