@@ -46,6 +46,28 @@ if (!isServerless) {
   setInterval(monitorMemory, 30000);
 }
 
+const connectDB = require('./config/db');
+
+// Connect to database and wait for it
+let dbConnection = null;
+const initDB = async () => {
+  try {
+    dbConnection = await connectDB();
+    if (dbConnection) {
+      console.log('Database connection established');
+    } else {
+      console.warn('Database connection failed or skipped - MONGO_URI may not be set');
+    }
+    return dbConnection;
+  } catch (err) {
+    console.error('Database connection error:', err.message);
+    return null;
+  }
+};
+
+// Initialize DB connection
+initDB();
+
 const app = express();
 
 const defaultOrigins = [
@@ -78,6 +100,20 @@ app.use(cors({
 app.options('*', cors());
 
 app.use(express.json());
+
+// Database health check middleware
+app.use('/api', (req, res, next) => {
+  const mongoose = require('mongoose');
+  if (mongoose.connection.readyState !== 1) {
+    return res.status(503).json({
+      success: false,
+      message: 'Database not connected',
+      error: 'MongoDB connection is not established. Please check your MONGO_URI environment variable.',
+      mongoUriSet: !!process.env.MONGO_URI
+    });
+  }
+  next();
+});
 
 // Serve static assets
 app.use('/public', express.static(path.join(__dirname, 'public')));
@@ -117,11 +153,17 @@ app.get('/', (req, res) => {
 });
 
 app.get('/health', (req, res) => {
+  const mongoose = require('mongoose');
   res.json({
     status: 'OK',
     message: 'Server is running',
     timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV || 'development'
+    environment: process.env.NODE_ENV || 'development',
+    database: {
+      connected: mongoose.connection.readyState === 1,
+      readyState: mongoose.connection.readyState,
+      mongoUriSet: !!process.env.MONGO_URI
+    }
   });
 });
 
