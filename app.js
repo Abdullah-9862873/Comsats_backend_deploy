@@ -71,6 +71,7 @@ initDB();
 const app = express();
 
 const defaultOrigins = [
+  'https://comsats-frontend-deploy.vercel.app',
   'https://comsats-backend-deploy-rjcj.vercel.app',
   'http://localhost:5173',
   'http://localhost:5174',
