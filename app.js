@@ -121,51 +121,62 @@ app.get('/health', (req, res) => {
   });
 });
 
-// Safe route loader with error handling
-const loadRoute = (routePath) => {
-  try {
-    return require(routePath);
-  } catch (error) {
-    console.error(`❌ Failed to load route ${routePath}:`, error.message);
-    return (req, res) => {
-      res.status(500).json({
-        success: false,
-        message: `Route module failed to load`,
-        route: routePath,
-        error: error.message
-      });
-    };
-  }
-};
+// Import all routes directly for better Vercel bundling support
+const authRoutes = require('./routes/auth');
+const adminRoutes = require('./routes/adminNew');
+const jobsRoutes = require('./routes/jobs');
+const applicationsRoutes = require('./routes/applications');
+const studentsRoutes = require('./routes/students');
+const supervisorsRoutes = require('./routes/supervisors');
+const supervisionRequestsRoutes = require('./routes/supervisionRequests');
+const supervisorReportsRoutes = require('./routes/supervisorReports');
+const notificationsRoutes = require('./routes/notifications');
+const companyProfileRoutes = require('./routes/companyProfile');
+const companiesRoutes = require('./routes/companies');
+const offerLettersRoutes = require('./routes/offerLetters');
+const misconductReportsRoutes = require('./routes/misconductReports');
+const internshipAppraisalsRoutes = require('./routes/internshipAppraisals');
+const progressReportsRoutes = require('./routes/progressReports');
+const joiningReportsRoutes = require('./routes/joiningReports');
+const supervisorChatRoutes = require('./routes/supervisorChat');
+const studentChatRoutes = require('./routes/studentChat');
+const completionCertificatesRoutes = require('./routes/completionCertificates');
+const supervisorEvaluationsRoutes = require('./routes/supervisorEvaluations');
+const finalEvaluationRoutes = require('./routes/finalEvaluation');
+const testDataRoutes = require('./routes/testData');
+const weeklyReportsRoutes = require('./routes/weeklyReports');
+const internshipReportsRoutes = require('./routes/internshipReports');
+const interneeEvaluationsRoutes = require('./routes/interneeEvaluations');
+const testJobsRoutes = require('./routes/testJobs');
 
 // Routes
-app.use('/api/auth', loadRoute('./routes/auth'));
-app.use('/api/admin', loadRoute('./routes/adminNew'));
-app.use('/api/jobs', loadRoute('./routes/jobs'));
-app.use('/api/internships', loadRoute('./routes/jobs')); // Alias for frontend compatibility
-app.use('/api/applications', loadRoute('./routes/applications'));
-app.use('/api/students', loadRoute('./routes/students'));
-app.use('/api/supervisors', loadRoute('./routes/supervisors'));
-app.use('/api/supervision-requests', loadRoute('./routes/supervisionRequests'));
-app.use('/api/supervisor-reports', loadRoute('./routes/supervisorReports'));
-app.use('/api/notifications', loadRoute('./routes/notifications'));
-app.use('/api/company-profile', loadRoute('./routes/companyProfile'));
-app.use('/api/companies', loadRoute('./routes/companies'));
-app.use('/api/offer-letters', loadRoute('./routes/offerLetters'));
-app.use('/api/misconduct-reports', loadRoute('./routes/misconductReports'));
-app.use('/api/internship-appraisals', loadRoute('./routes/internshipAppraisals'));
-app.use('/api/progress-reports', loadRoute('./routes/progressReports'));
-app.use('/api/joining-reports', loadRoute('./routes/joiningReports'));
-app.use('/api/supervisor-chat', loadRoute('./routes/supervisorChat'));
-app.use('/api/student-chat', loadRoute('./routes/studentChat'));
-app.use('/api/completion-certificates', loadRoute('./routes/completionCertificates'));
-app.use('/api/supervisor-evaluations', loadRoute('./routes/supervisorEvaluations'));
-app.use('/api/final-evaluation', loadRoute('./routes/finalEvaluation'));
-app.use('/api/test-data', loadRoute('./routes/testData'));
-app.use('/api/weekly-reports', loadRoute('./routes/weeklyReports'));
-app.use('/api/internship-reports', loadRoute('./routes/internshipReports'));
-app.use('/api/internee-evaluations', loadRoute('./routes/interneeEvaluations'));
-app.use('/api/test-jobs', loadRoute('./routes/testJobs'));
+app.use('/api/auth', authRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/jobs', jobsRoutes);
+app.use('/api/internships', jobsRoutes); // Alias for frontend compatibility
+app.use('/api/applications', applicationsRoutes);
+app.use('/api/students', studentsRoutes);
+app.use('/api/supervisors', supervisorsRoutes);
+app.use('/api/supervision-requests', supervisionRequestsRoutes);
+app.use('/api/supervisor-reports', supervisorReportsRoutes);
+app.use('/api/notifications', notificationsRoutes);
+app.use('/api/company-profile', companyProfileRoutes);
+app.use('/api/companies', companiesRoutes);
+app.use('/api/offer-letters', offerLettersRoutes);
+app.use('/api/misconduct-reports', misconductReportsRoutes);
+app.use('/api/internship-appraisals', internshipAppraisalsRoutes);
+app.use('/api/progress-reports', progressReportsRoutes);
+app.use('/api/joining-reports', joiningReportsRoutes);
+app.use('/api/supervisor-chat', supervisorChatRoutes);
+app.use('/api/student-chat', studentChatRoutes);
+app.use('/api/completion-certificates', completionCertificatesRoutes);
+app.use('/api/supervisor-evaluations', supervisorEvaluationsRoutes);
+app.use('/api/final-evaluation', finalEvaluationRoutes);
+app.use('/api/test-data', testDataRoutes);
+app.use('/api/weekly-reports', weeklyReportsRoutes);
+app.use('/api/internship-reports', internshipReportsRoutes);
+app.use('/api/internee-evaluations', interneeEvaluationsRoutes);
+app.use('/api/test-jobs', testJobsRoutes);
 
 app.get('/debug/files', (req, res) => {
   const uploadsPath = path.join(__dirname, 'uploads');
