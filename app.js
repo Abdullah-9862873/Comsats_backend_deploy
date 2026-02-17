@@ -49,6 +49,7 @@ if (!isServerless) {
 const app = express();
 
 const defaultOrigins = [
+  'https://comsats-backend-deploy-rjcj.vercel.app',
   'http://localhost:5173',
   'http://localhost:5174',
   'http://localhost:5175',
@@ -67,7 +68,9 @@ const originList = allowedOrigins.length ? allowedOrigins : defaultOrigins;
 
 app.use(cors({
   origin: originList,
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json());
