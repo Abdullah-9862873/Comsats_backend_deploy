@@ -49,10 +49,25 @@ if (!isServerless) {
 
 const app = express();
 
-// Ensure MongoDB connection is attempted when the app boots
-connectDB().catch((error) => {
-  console.error('❌ Initial MongoDB connection attempt failed:', error.message);
-});
+// Lazy database connection - only connect when needed
+let dbConnected = false;
+const ensureDB = async () => {
+  if (!dbConnected) {
+    try {
+      await connectDB();
+      dbConnected = true;
+    } catch (error) {
+      console.error('Database connection failed:', error.message);
+    }
+  }
+};
+
+// Only auto-connect in non-serverless environments
+if (!isServerless) {
+  connectDB().catch((error) => {
+    console.error('❌ Initial MongoDB connection attempt failed:', error.message);
+  });
+}
 
 const defaultOrigins = [
   'http://localhost:5173',
@@ -103,63 +118,77 @@ app.use('/uploads', (req, res, next) => {
 });
 
 // Default root + health check endpoints shared by local and serverless deployments
-app.get('/', (req, res) => {
-  res.json({
-    status: 'OK',
-    message: 'Backend is running',
-    uptime: process.uptime(),
-    timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV || 'development',
-    healthEndpoint: '/health'
-  });
+app.get('/', async (req, res) => {
+  try {
+    res.json({
+      status: 'OK',
+      message: 'Backend is running',
+      uptime: process.uptime(),
+      timestamp: new Date().toISOString(),
+      environment: process.env.NODE_ENV || 'development',
+      healthEndpoint: '/health'
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
 });
 
-app.get('/health', (req, res) => {
-  res.json({
-    status: 'OK',
-    message: 'Server is running',
-    timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV || 'development'
-  });
+app.get('/health', async (req, res) => {
+  try {
+    res.json({
+      status: 'OK',
+      message: 'Server is running',
+      timestamp: new Date().toISOString(),
+      environment: process.env.NODE_ENV || 'development'
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
 });
+
+// Middleware to ensure DB connection for routes that need it
+const ensureDbConnection = async (req, res, next) => {
+  await ensureDB();
+  next();
+};
 
 // Routes
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/admin', require('./routes/adminNew'));
-app.use('/api/jobs', require('./routes/jobs'));
-app.use('/api/applications', require('./routes/applications'));
-app.use('/api/students', require('./routes/students'));
-app.use('/api/supervisors', require('./routes/supervisors'));
-app.use('/api/supervision-requests', require('./routes/supervisionRequests'));
-app.use('/api/supervisor-reports', require('./routes/supervisorReports'));
-app.use('/api/notifications', require('./routes/notifications'));
-app.use('/api/company-profile', require('./routes/companyProfile'));
-app.use('/api/companies', require('./routes/companies'));
-app.use('/api/offer-letters', require('./routes/offerLetters'));
-app.use('/api/misconduct-reports', require('./routes/misconductReports'));
-app.use('/api/internship-appraisals', require('./routes/internshipAppraisals'));
-app.use('/api/progress-reports', require('./routes/progressReports'));
-app.use('/api/joining-reports', require('./routes/joiningReports'));
-app.use('/api/supervisor-chat', require('./routes/supervisorChat'));
-app.use('/api/student-chat', require('./routes/studentChat'));
-app.use('/api/completion-certificates', require('./routes/completionCertificates'));
-app.use('/api/supervisor-evaluations', require('./routes/supervisorEvaluations'));
-app.use('/api/final-evaluation', require('./routes/finalEvaluation'));
-app.use('/api/test-data', require('./routes/testData'));
+app.use('/api/auth', ensureDbConnection, require('./routes/auth'));
+app.use('/api/admin', ensureDbConnection, require('./routes/adminNew'));
+app.use('/api/jobs', ensureDbConnection, require('./routes/jobs'));
+app.use('/api/applications', ensureDbConnection, require('./routes/applications'));
+app.use('/api/students', ensureDbConnection, require('./routes/students'));
+app.use('/api/supervisors', ensureDbConnection, require('./routes/supervisors'));
+app.use('/api/supervision-requests', ensureDbConnection, require('./routes/supervisionRequests'));
+app.use('/api/supervisor-reports', ensureDbConnection, require('./routes/supervisorReports'));
+app.use('/api/notifications', ensureDbConnection, require('./routes/notifications'));
+app.use('/api/company-profile', ensureDbConnection, require('./routes/companyProfile'));
+app.use('/api/companies', ensureDbConnection, require('./routes/companies'));
+app.use('/api/offer-letters', ensureDbConnection, require('./routes/offerLetters'));
+app.use('/api/misconduct-reports', ensureDbConnection, require('./routes/misconductReports'));
+app.use('/api/internship-appraisals', ensureDbConnection, require('./routes/internshipAppraisals'));
+app.use('/api/progress-reports', ensureDbConnection, require('./routes/progressReports'));
+app.use('/api/joining-reports', ensureDbConnection, require('./routes/joiningReports'));
+app.use('/api/supervisor-chat', ensureDbConnection, require('./routes/supervisorChat'));
+app.use('/api/student-chat', ensureDbConnection, require('./routes/studentChat'));
+app.use('/api/completion-certificates', ensureDbConnection, require('./routes/completionCertificates'));
+app.use('/api/supervisor-evaluations', ensureDbConnection, require('./routes/supervisorEvaluations'));
+app.use('/api/final-evaluation', ensureDbConnection, require('./routes/finalEvaluation'));
+app.use('/api/test-data', ensureDbConnection, require('./routes/testData'));
 
 // Weekly reports debugging middleware + routes
-app.use('/api/weekly-reports', (req, res, next) => {
+app.use('/api/weekly-reports', ensureDbConnection, (req, res, next) => {
   console.log(`📍 WEEKLY REPORTS DEBUG: ${req.method} ${req.path}`);
   console.log(`📋 Headers:`, req.headers.authorization ? 'Auth header present' : 'No auth header');
   next();
 });
 
-app.use('/api/weekly-reports', require('./routes/weeklyReports'));
-app.use('/api/internship-reports', require('./routes/internshipReports'));
-app.use('/api/internee-evaluations', require('./routes/interneeEvaluations'));
-app.use('/api/test-jobs', require('./routes/testJobs'));
+app.use('/api/weekly-reports', ensureDbConnection, require('./routes/weeklyReports'));
+app.use('/api/internship-reports', ensureDbConnection, require('./routes/internshipReports'));
+app.use('/api/internee-evaluations', ensureDbConnection, require('./routes/interneeEvaluations'));
+app.use('/api/test-jobs', ensureDbConnection, require('./routes/testJobs'));
 
-app.get('/debug/files', (req, res) => {
+app.get('/debug/files', ensureDbConnection, (req, res) => {
   const uploadsPath = path.join(__dirname, 'uploads');
   const result = {};
 
