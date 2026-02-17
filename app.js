@@ -125,33 +125,49 @@ app.get('/health', (req, res) => {
   });
 });
 
+// Helper to safely load routes
+const safeRequire = (modulePath) => {
+  try {
+    return require(modulePath);
+  } catch (err) {
+    console.error(`❌ Failed to load ${modulePath}:`, err.message);
+    return (req, res) => {
+      res.status(500).json({
+        success: false,
+        message: `Route module failed to load: ${modulePath}`,
+        error: err.message
+      });
+    };
+  }
+};
+
 // Import all routes directly for better Vercel bundling support
-const authRoutes = require('./routes/auth');
-const adminRoutes = require('./routes/adminNew');
-const jobsRoutes = require('./routes/jobs');
-const applicationsRoutes = require('./routes/applications');
-const studentsRoutes = require('./routes/students');
-const supervisorsRoutes = require('./routes/supervisors');
-const supervisionRequestsRoutes = require('./routes/supervisionRequests');
-const supervisorReportsRoutes = require('./routes/supervisorReports');
-const notificationsRoutes = require('./routes/notifications');
-const companyProfileRoutes = require('./routes/companyProfile');
-const companiesRoutes = require('./routes/companies');
-const offerLettersRoutes = require('./routes/offerLetters');
-const misconductReportsRoutes = require('./routes/misconductReports');
-const internshipAppraisalsRoutes = require('./routes/internshipAppraisals');
-const progressReportsRoutes = require('./routes/progressReports');
-const joiningReportsRoutes = require('./routes/joiningReports');
-const supervisorChatRoutes = require('./routes/supervisorChat');
-const studentChatRoutes = require('./routes/studentChat');
-const completionCertificatesRoutes = require('./routes/completionCertificates');
-const supervisorEvaluationsRoutes = require('./routes/supervisorEvaluations');
-const finalEvaluationRoutes = require('./routes/finalEvaluation');
-const testDataRoutes = require('./routes/testData');
-const weeklyReportsRoutes = require('./routes/weeklyReports');
-const internshipReportsRoutes = require('./routes/internshipReports');
-const interneeEvaluationsRoutes = require('./routes/interneeEvaluations');
-const testJobsRoutes = require('./routes/testJobs');
+const authRoutes = safeRequire('./routes/auth');
+const adminRoutes = safeRequire('./routes/adminNew');
+const jobsRoutes = safeRequire('./routes/jobs');
+const applicationsRoutes = safeRequire('./routes/applications');
+const studentsRoutes = safeRequire('./routes/students');
+const supervisorsRoutes = safeRequire('./routes/supervisors');
+const supervisionRequestsRoutes = safeRequire('./routes/supervisionRequests');
+const supervisorReportsRoutes = safeRequire('./routes/supervisorReports');
+const notificationsRoutes = safeRequire('./routes/notifications');
+const companyProfileRoutes = safeRequire('./routes/companyProfile');
+const companiesRoutes = safeRequire('./routes/companies');
+const offerLettersRoutes = safeRequire('./routes/offerLetters');
+const misconductReportsRoutes = safeRequire('./routes/misconductReports');
+const internshipAppraisalsRoutes = safeRequire('./routes/internshipAppraisals');
+const progressReportsRoutes = safeRequire('./routes/progressReports');
+const joiningReportsRoutes = safeRequire('./routes/joiningReports');
+const supervisorChatRoutes = safeRequire('./routes/supervisorChat');
+const studentChatRoutes = safeRequire('./routes/studentChat');
+const completionCertificatesRoutes = safeRequire('./routes/completionCertificates');
+const supervisorEvaluationsRoutes = safeRequire('./routes/supervisorEvaluations');
+const finalEvaluationRoutes = safeRequire('./routes/finalEvaluation');
+const testDataRoutes = safeRequire('./routes/testData');
+const weeklyReportsRoutes = safeRequire('./routes/weeklyReports');
+const internshipReportsRoutes = safeRequire('./routes/internshipReports');
+const interneeEvaluationsRoutes = safeRequire('./routes/interneeEvaluations');
+const testJobsRoutes = safeRequire('./routes/testJobs');
 
 // Routes
 app.use('/api/auth', authRoutes);
