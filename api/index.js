@@ -1,6 +1,8 @@
-const app = require('./app');
+const app = require('../app');
 
-module.exports = (req, res) => app(req, res);
+module.exports = async (req, res) => {
+  return app(req, res);
+};
 
 module.exports.config = {
   api: {
