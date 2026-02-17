@@ -23,9 +23,14 @@ const connectDB = async () => {
 
   if (!cached.promise) {
     console.log('🔌 Connecting to MongoDB...');
+    console.log('MONGO_URI starts with:', process.env.MONGO_URI.substring(0, 20) + '...');
+    
     cached.promise = mongoose.connect(process.env.MONGO_URI, {
-      serverSelectionTimeoutMS: 5000,
-      socketTimeoutMS: 45000
+      serverSelectionTimeoutMS: 30000, // Increased from 5000
+      socketTimeoutMS: 45000,
+      connectTimeoutMS: 30000, // Added connection timeout
+      maxPoolSize: 10, // Limit connections for serverless
+      bufferCommands: false // Disable buffering for faster errors
     })
       .then((conn) => {
         console.log(`✅ MongoDB Connected: ${conn.connection.host}`);

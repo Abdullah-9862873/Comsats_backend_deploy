@@ -101,18 +101,38 @@ app.options('*', cors());
 
 app.use(express.json());
 
-// Database health check middleware
-app.use('/api', (req, res, next) => {
+// Database connection middleware - ensures DB is connected before handling requests
+app.use('/api', async (req, res, next) => {
   const mongoose = require('mongoose');
-  if (mongoose.connection.readyState !== 1) {
+  
+  if (mongoose.connection.readyState === 1) {
+    return next();
+  }
+  
+  // Try to connect if not connected
+  try {
+    const connectDB = require('./config/db');
+    await connectDB();
+    
+    if (mongoose.connection.readyState === 1) {
+      return next();
+    } else {
+      return res.status(503).json({
+        success: false,
+        message: 'Database connection failed',
+        error: 'Could not establish MongoDB connection. Please check your MONGO_URI environment variable.',
+        mongoUriSet: !!process.env.MONGO_URI,
+        readyState: mongoose.connection.readyState
+      });
+    }
+  } catch (err) {
     return res.status(503).json({
       success: false,
-      message: 'Database not connected',
-      error: 'MongoDB connection is not established. Please check your MONGO_URI environment variable.',
+      message: 'Database connection error',
+      error: err.message,
       mongoUriSet: !!process.env.MONGO_URI
     });
   }
-  next();
 });
 
 // Serve static assets
