@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Congratulations - You're Hired! - COMSATS Internship Portal</title>
+    <style type="text/css">
+        /* Reset styles */
+        body, table, td, p, a, li, blockquote {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+        table, td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+        img {
+            -ms-interpolation-mode: bicubic;
+            border: 0;
+            outline: none;
+            text-decoration: none;
+        }
+        
+        /* Base styles */
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            background-color: #f8fafc !important;
+            font-family: Arial, sans-serif !important;
+        }
+        
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="celebration" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.5" fill="rgba(255,255,255,0.2)"/></pattern></defs><rect width="100" height="100" fill="url(%23celebration)"/></svg>');
+            animation: celebration 3s linear infinite;
+            opacity: 0.4;
+        }
+        
+        @keyframes celebration {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .logo {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 0 auto 20px;
+            width: 200px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo-text {
+            color: #059669;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        
+        .logo-subtitle {
+            color: #10b981;
+            font-size: 10px;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+        
+        .header h1 {
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header p {
+            color: #d1fae5;
+            font-size: 18px;
+            margin: 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .success-icon {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .success-circle {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 48px;
+            font-weight: bold;
+            box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .congratulations {
+            font-size: 24px;
+            color: #1f2937;
+            margin: 30px 0;
+            font-weight: 700;
+            text-align: center;
+            background: linear-gradient(135deg, #059669, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .message {
+            font-size: 16px;
+            color: #4b5563;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .offer-details {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 3px solid #10b981;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 6px 20px rgba(5, 150, 105, 0.1);
+        }
+        
+        .offer-details h3 {
+            color: #059669;
+            font-size: 20px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .detail-item {
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #10b981;
+        }
+        
+        .detail-label {
+            color: #065f46;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        
+        .detail-value {
+            color: #047857;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .next-steps {
+            background-color: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 0 12px 12px 0;
+        }
+        
+        .next-steps h3 {
+            color: #92400e;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .next-steps ul {
+            color: #92400e;
+            font-size: 14px;
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .next-steps li {
+            margin: 10px 0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 18px 36px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            margin: 15px;
+            box-shadow: 0 6px 20px rgba(5, 150, 105, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .secondary-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 18px 36px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            margin: 15px;
+            box-shadow: 0 6px 20px rgba(31, 41, 55, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .footer {
+            background-color: #f9fafb;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .footer p {
+            color: #6b7280;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <div class="logo-text">COMSATS</div>
+                <div class="logo-subtitle">UNIVERSITY</div>
+            </div>
+            <h1>🎉 CONGRATULATIONS! 🎉</h1>
+            <p>You've Been Selected for the Internship!</p>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+
+            
+            <div class="congratulations">
+                Outstanding Achievement, {{studentName}}!
+            </div>
+            
+            <div class="message">
+                We are absolutely thrilled to inform you that <strong>{{companyName}}</strong> has selected you for the 
+                <strong>{{jobTitle}}</strong> internship position! After careful consideration of your interview performance 
+                and qualifications, they were impressed with your skills and potential.
+            </div>
+            
+            <!-- Offer Details -->
+            <div class="offer-details">
+                <h3>🎯 Your Internship Offer Details</h3>
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <div class="detail-label">Position</div>
+                        <div class="detail-value">{{jobTitle}}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Company</div>
+                        <div class="detail-value">{{companyName}}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Department</div>
+                        <div class="detail-value">{{department}}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Duration</div>
+                        <div class="detail-value">{{internshipDuration}}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Start Date</div>
+                        <div class="detail-value">{{startDate}}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">End Date</div>
+                        <div class="detail-value">{{endDate}}</div>
+                    </div>
+                    {{#if stipend}}
+                    <div class="detail-item">
+                        <div class="detail-label">Monthly Stipend</div>
+                        <div class="detail-value">{{stipend}}</div>
+                    </div>
+                    {{/if}}
+                    <div class="detail-item">
+                        <div class="detail-label">Location</div>
+                        <div class="detail-value">{{workLocation}}</div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 20px; padding: 15px; background: #ffffff; border-radius: 8px;">
+                    <div class="detail-label">Reporting Manager</div>
+                    <div class="detail-value" style="font-size: 16px;">{{managerName}} ({{managerTitle}})</div>
+                    <div style="color: #065f46; font-size: 13px; margin-top: 5px;">{{managerEmail}}</div>
+                </div>
+            </div>
+            
+            <div class="message">
+                This is a fantastic opportunity to gain hands-on experience, develop your professional skills, and 
+                make valuable industry connections. We're confident you'll make the most of this experience!
+            </div>
+            
+            <!-- Next Steps -->
+            <div class="next-steps">
+                <h3>📋 Next Steps - Important Actions Required</h3>
+                <ul>
+                    <li><strong>Accept the Offer:</strong> Confirm your acceptance within {{acceptanceDeadline}} days</li>
+                    <li><strong>Complete Paperwork:</strong> Fill out all required documentation and contracts</li>
+                    <li><strong>Background Check:</strong> Complete any background verification if required</li>
+                    <li><strong>Orientation:</strong> Attend the company orientation on {{orientationDate}}</li>
+                    <li><strong>Contact Your Supervisor:</strong> Inform {{supervisorName}} about your successful placement</li>
+                    <li><strong>Prepare for Day One:</strong> Review company policies and prepare necessary documents</li>
+                </ul>
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="{{acceptOfferUrl}}" class="cta-button">Accept Offer</a>
+            </div>
+            
+            <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
+            
+            
+            <div style="font-size: 16px; color: #059669; text-align: center; margin-top: 30px; font-weight: 600;">
+                Congratulations once again! We're incredibly proud of your achievement!<br>
+                <strong>COMSATS Internship Portal Team</strong>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>COMSATS Internship Portal</strong></p>
+            <p>This is an automated notification. For offer-related questions, contact the company's HR department.</p>
+            <p>For academic support, reach out to your supervisor or the internship coordinator.</p>
+            <p style="margin-top: 15px; font-size: 12px;">
+                © 2025 COMSATS University. All rights reserved.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

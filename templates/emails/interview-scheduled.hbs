@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Interview Scheduled - COMSATS Internship Portal</title>
+    <style type="text/css">
+        /* Reset styles */
+        body, table, td, p, a, li, blockquote {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+        table, td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+        img {
+            -ms-interpolation-mode: bicubic;
+            border: 0;
+            outline: none;
+            text-decoration: none;
+        }
+        
+        /* Base styles */
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            background-color: #f8fafc !important;
+            font-family: Arial, sans-serif !important;
+        }
+        
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .logo {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 0 auto 20px;
+            width: 200px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .logo-text {
+            color: #ea580c;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        
+        .logo-subtitle {
+            color: #f97316;
+            font-size: 10px;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+        
+        .header h1 {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+        }
+        
+        .header p {
+            color: #fed7aa;
+            font-size: 16px;
+            margin: 0;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .interview-icon {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .interview-circle {
+            background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: bold;
+            box-shadow: 0 6px 20px rgba(234, 88, 12, 0.3);
+        }
+        
+        .greeting {
+            font-size: 20px;
+            color: #1f2937;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        .message {
+            font-size: 16px;
+            color: #4b5563;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .interview-details {
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+            border: 2px solid #f97316;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .interview-details h3 {
+            color: #ea580c;
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        .detail-row {
+            display: flex;
+            margin: 12px 0;
+            align-items: center;
+        }
+        
+        .detail-label {
+            color: #9a3412;
+            font-weight: 600;
+            font-size: 14px;
+            min-width: 100px;
+        }
+        
+        .detail-value {
+            color: #7c2d12;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .urgent-notice {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border: 2px solid #ef4444;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .urgent-notice h3 {
+            color: #dc2626;
+            font-size: 16px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .urgent-notice p {
+            color: #b91c1c;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        
+        .preparation-tips {
+            background-color: #f0f9ff;
+            border-left: 4px solid #0ea5e9;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .preparation-tips h3 {
+            color: #0369a1;
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .preparation-tips ul {
+            color: #0369a1;
+            font-size: 14px;
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .preparation-tips li {
+            margin: 8px 0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            margin: 10px;
+            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
+        }
+        
+        .secondary-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            margin: 10px;
+            box-shadow: 0 4px 12px rgba(31, 41, 55, 0.3);
+        }
+        
+        .footer {
+            background-color: #f9fafb;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .footer p {
+            color: #6b7280;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <div class="logo-text">COMSATS</div>
+                <div class="logo-subtitle">UNIVERSITY</div>
+            </div>
+            <h1>Interview Scheduled!</h1>
+            <p>Your Interview Has Been Confirmed</p>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            
+            <div class="greeting">
+                Interview Invitation for {{studentName}}
+            </div>
+            
+            <div class="message">
+                Congratulations! <strong>{{companyName}}</strong> has reviewed your application and would like to invite you 
+                for an interview for the <strong>{{jobTitle}}</strong> position. This is an exciting opportunity to showcase your skills and learn more about the role.
+            </div>
+            
+            <!-- Interview Details -->
+            <div class="interview-details">
+                <h3>📅 Interview Details</h3>
+                <div class="detail-row">
+                    <div class="detail-label">Date:</div>
+                    <div class="detail-value">{{interviewDate}}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Time:</div>
+                    <div class="detail-value">{{interviewTime}}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Duration:</div>
+                    <div class="detail-value">{{interviewDuration}}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Type:</div>
+                    <div class="detail-value">{{interviewType}}</div>
+                </div>
+                {{#if interviewLocation}}
+                <div class="detail-row">
+                    <div class="detail-label">Location:</div>
+                    <div class="detail-value">{{interviewLocation}}</div>
+                </div>
+                {{/if}}
+                {{#if meetingLink}}
+                <div class="detail-row">
+                    <div class="detail-label">Meeting Link:</div>
+                    <div class="detail-value"><a href="{{meetingLink}}" style="color: #ea580c;">{{meetingLink}}</a></div>
+                </div>
+                {{/if}}
+                <div class="detail-row">
+                    <div class="detail-label">Interviewer:</div>
+                    <div class="detail-value">{{interviewerName}} ({{interviewerTitle}})</div>
+                </div>
+                {{#if interviewerEmail}}
+                <div class="detail-row">
+                    <div class="detail-label">Contact:</div>
+                    <div class="detail-value">{{interviewerEmail}}</div>
+                </div>
+                {{/if}}
+            </div>
+            
+            <!-- Urgent Notice -->
+            <div class="urgent-notice">
+                <h3>⚠️ Important Notice</h3>
+                <p><strong>Please confirm your attendance within 24 hours</strong></p>
+                <p>If you cannot attend, contact the company immediately to reschedule</p>
+            </div>
+            
+            <!-- Preparation Tips -->
+            <div class="preparation-tips">
+                <h3>🎯 Interview Preparation Tips</h3>
+                <ul>
+                    <li><strong>Research the Company:</strong> Study {{companyName}}'s background, values, and recent projects</li>
+                    <li><strong>Review Job Description:</strong> Understand the {{jobTitle}} role requirements thoroughly</li>
+                    <li><strong>Prepare Questions:</strong> Have thoughtful questions about the role and company culture</li>
+                    <li><strong>Technical Preparation:</strong> Review relevant technical skills and concepts</li>
+                    <li><strong>Documents Ready:</strong> Have your resume, portfolio, and academic transcripts available</li>
+                    <li><strong>Professional Attire:</strong> Dress appropriately for the interview format</li>
+                    <li><strong>Test Technology:</strong> If online, test your camera, microphone, and internet connection</li>
+                    <li><strong>Arrive Early:</strong> Plan to arrive 10-15 minutes before the scheduled time</li>
+                </ul>
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="{{confirmAttendanceUrl}}" class="cta-button">Confirm Attendance</a>
+                <a href="{{companyProfileUrl}}" class="secondary-button">View Company Profile</a>
+            </div>
+            
+            <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
+            
+            <div style="font-size: 14px; color: #6b7280;">
+                <strong>Interview Information:</strong><br>
+                • Interview ID: {{interviewId}}<br>
+                • Position: {{jobTitle}} at {{companyName}}<br>
+                • Application ID: {{applicationId}}<br>
+                • Scheduled: {{scheduleDate}}<br>
+                • Reminder: We'll send you a reminder 24 hours before the interview
+            </div>
+            
+            <div style="font-size: 14px; color: #6b7280; text-align: center; margin-top: 30px;">
+                Best of luck with your interview!<br>
+                <strong>COMSATS Internship Portal Team</strong>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>COMSATS Internship Portal</strong></p>
+            <p>This is an automated notification. For interview inquiries, contact the company directly.</p>
+            <p>For technical issues, contact the internship coordinator.</p>
+            <p style="margin-top: 15px; font-size: 12px;">
+                © 2025 COMSATS University. All rights reserved.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Evaluation Completed</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #003366;
+        }
+        .header h1 {
+            color: #003366;
+            margin: 0 0 10px 0;
+            font-size: 24px;
+        }
+        .header p {
+            color: #666;
+            margin: 0;
+            font-size: 14px;
+        }
+        .content {
+            color: #444;
+        }
+        .content p {
+            margin-bottom: 15px;
+        }
+        .info-box {
+            background-color: #f0f4f8;
+            padding: 20px;
+            border-left: 4px solid #003366;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+        .info-box p {
+            margin: 8px 0;
+        }
+        .info-box strong {
+            color: #003366;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #003366;
+            color: #ffffff !important;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .button:hover {
+            background-color: #00509E;
+        }
+        .footer {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 30px;
+            border-top: 1px solid #e0e0e0;
+            color: #777;
+            font-size: 12px;
+        }
+        .note {
+            background-color: #fff9e6;
+            padding: 15px;
+            border-left: 4px solid #f59e0b;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✅ Internship Evaluation Completed</h1>
+            <p>COMSATS University Islamabad - Internship Portal</p>
+        </div>
+
+        <div class="content">
+            <p><strong>Dear {{studentName}},</strong></p>
+            
+            <p>We are pleased to inform you that <strong>{{companyName}}</strong> has completed your internship evaluation.</p>
+
+            <div class="info-box">
+                <p><strong>Company:</strong> {{companyName}}</p>
+                <p><strong>Position:</strong> {{jobTitle}}</p>
+                <p><strong>Evaluation Date:</strong> {{evaluationDate}}</p>
+            </div>
+
+            <div class="note">
+                <p><strong>📋 Next Steps:</strong></p>
+                <p>The evaluation has been forwarded to your supervisor <strong>({{supervisorName}})</strong> for review and finalization of your internship results.</p>
+                <p>Your supervisor will complete the final assessment and marks will be announced once the evaluation process is fully completed.</p>
+            </div>
+
+            <p>You will receive another notification once your supervisor finalizes the results.</p>
+
+            <p style="margin-top: 30px;"><strong>Best regards,</strong><br>
+            COMSATS Internship Portal Team</p>
+        </div>
+
+        <div class="footer">
+            <p>This is an automated notification from the COMSATS Internship Portal.</p>
+            <p>For any questions, please contact your supervisor or the internship coordination office.</p>
+            <p>&copy; {{currentYear}} COMSATS University Islamabad. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

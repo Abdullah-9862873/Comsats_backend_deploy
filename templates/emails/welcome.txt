@@ -1,0 +1,42 @@
+=====================================
+COMSATS UNIVERSITY INTERNSHIP PORTAL
+=====================================
+
+Welcome, {{name}}! 
+
+We're thrilled to have you join the COMSATS Internship Portal! Your journey towards excellence starts here.
+
+{{#if (eq role 'student')}}
+FOR STUDENTS:
+Discover amazing internship opportunities, build your professional profile, and connect with top companies. Your future career awaits!
+{{/if}}
+
+{{#if (eq role 'company')}}
+FOR COMPANIES:
+Find talented and motivated students for your internship programs. Post opportunities and discover the next generation of professionals!
+{{/if}}
+
+{{#if (eq role 'supervisor')}}
+FOR SUPERVISORS:
+Guide and mentor students throughout their internship journey. Your expertise shapes the future of our students!
+{{/if}}
+
+WHAT'S NEXT?
+✓ Opportunities - Discover exciting internships
+✓ Network - Connect with professionals  
+✓ Growth - Track your progress
+
+GET STARTED:
+Visit your dashboard: {{dashboardUrl}}
+
+=====================================
+
+Best regards,
+COMSATS Internship Portal Team
+
+© {{currentYear}} COMSATS University Internship Portal. All rights reserved.
+
+IMPORTANT: Do not reply to this email. This is an automated message from the COMSATS Internship Portal.
+For support, please contact us through the portal.
+
+=====================================

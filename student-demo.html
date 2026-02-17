@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard API Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .section {
+            background: #f4f4f4;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .form-group {
+            margin: 10px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background: #007cba;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #005a87;
+        }
+        .success {
+            color: green;
+            background: #d4edda;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .error {
+            color: red;
+            background: #f8d7da;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .profile-data {
+            background: white;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .file-preview {
+            margin: 10px 0;
+        }
+        .file-preview img {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 4px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Student Dashboard API Demo</h1>
+    
+    <div id="loginSection" class="section">
+        <h2>Student Authentication</h2>
+        
+        <div id="authTabs">
+            <button onclick="showTab('login')">Login</button>
+            <button onclick="showTab('register')">Register</button>
+        </div>
+        
+        <!-- Login Form -->
+        <div id="loginTab">
+            <h3>Login</h3>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+        
+        <!-- Register Form -->
+        <div id="registerTab" class="hidden">
+            <h3>Register New Student</h3>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Full Name:</label>
+                    <input type="text" id="regFullName" required>
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" id="regEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input type="password" id="regPassword" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label>Department:</label>
+                    <select id="regDepartment" required>
+                        <option value="">Select Department</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Software Engineering">Software Engineering</option>
+                        <option value="Information Technology">Information Technology</option>
+                        <option value="Electrical Engineering">Electrical Engineering</option>
+                        <option value="Mechanical Engineering">Mechanical Engineering</option>
+                        <option value="Civil Engineering">Civil Engineering</option>
+                        <option value="Business Administration">Business Administration</option>
+                        <option value="Management Sciences">Management Sciences</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Chemistry">Chemistry</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Semester:</label>
+                    <select id="regSemester" required>
+                        <option value="">Select Semester</option>
+                        <option value="5th">5th Semester</option>
+                        <option value="6th">6th Semester</option>
+                        <option value="7th">7th Semester</option>
+                        <option value="8th">8th Semester</option>
+                    </select>
+                </div>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+        
+        <div id="authMessage"></div>
+    </div>
+    
+    <div id="dashboardSection" class="section hidden">
+        <h2>Student Dashboard</h2>
+        <button onclick="logout()">Logout</button>
+        <button onclick="loadProfile()">Refresh Profile</button>
+        
+        <div id="profileData" class="profile-data"></div>
+        
+        <h3>Update Profile</h3>
+        <form id="profileForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>CGPA (0.0 - 4.0):</label>
+                <input type="number" id="cgpa" min="0" max="4" step="0.01">
+            </div>
+            <div class="form-group">
+                <label>Phone Number:</label>
+                <input type="tel" id="phoneNumber">
+            </div>
+            <div class="form-group">
+                <label>Roll Number:</label>
+                <input type="text" id="rollNumber">
+            </div>
+            <div class="form-group">
+                <label>Attendance (%):</label>
+                <input type="number" id="attendance" min="0" max="100">
+            </div>
+            <div class="form-group">
+                <label>Backlogs:</label>
+                <input type="number" id="backlogs" min="0">
+            </div>
+            <div class="form-group">
+                <label>Profile Picture (JPEG, PNG, GIF - Max 5MB):</label>
+                <input type="file" id="profilePicture" accept="image/jpeg,image/png,image/gif">
+                <div id="profilePicturePreview" class="file-preview"></div>
+            </div>
+            <div class="form-group">
+                <label>CV (PDF, DOC, DOCX - Max 10MB):</label>
+                <input type="file" id="cv" accept=".pdf,.doc,.docx">
+                <div id="cvPreview" class="file-preview"></div>
+            </div>
+            <div class="form-group">
+                <label>Certificates (PDF, DOC, DOCX, Images - Max 10MB each, Max 5 files):</label>
+                <input type="file" id="certificates" multiple accept=".pdf,.doc,.docx,image/jpeg,image/png">
+                <div id="certificatesPreview" class="file-preview"></div>
+            </div>
+            <button type="submit">Update Profile</button>
+        </form>
+        
+        <div id="profileMessage"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5000/api/students';
+        let authToken = localStorage.getItem('studentToken');
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            if (authToken) {
+                showDashboard();
+                loadProfile();
+            }
+            
+            // Add form event listeners
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            document.getElementById('registerForm').addEventListener('submit', handleRegister);
+            document.getElementById('profileForm').addEventListener('submit', handleProfileUpdate);
+            
+            // Add file preview listeners
+            document.getElementById('profilePicture').addEventListener('change', previewProfilePicture);
+            document.getElementById('cv').addEventListener('change', previewCV);
+            document.getElementById('certificates').addEventListener('change', previewCertificates);
+        });
+
+        // Tab switching
+        function showTab(tab) {
+            document.getElementById('loginTab').classList.toggle('hidden', tab !== 'login');
+            document.getElementById('registerTab').classList.toggle('hidden', tab !== 'register');
+        }
+
+        // Authentication functions
+        async function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            try {
+                const response = await fetch(`${API_BASE}/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    authToken = result.data.token;
+                    localStorage.setItem('studentToken', authToken);
+                    showMessage('authMessage', 'Login successful!', 'success');
+                    showDashboard();
+                    loadProfile();
+                } else {
+                    showMessage('authMessage', result.message, 'error');
+                }
+            } catch (error) {
+                showMessage('authMessage', 'Login failed: ' + error.message, 'error');
+            }
+        }
+
+        async function handleRegister(e) {
+            e.preventDefault();
+            const formData = {
+                fullName: document.getElementById('regFullName').value,
+                email: document.getElementById('regEmail').value,
+                password: document.getElementById('regPassword').value,
+                department: document.getElementById('regDepartment').value,
+                semester: document.getElementById('regSemester').value
+            };
+            
+            try {
+                const response = await fetch(`${API_BASE}/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    authToken = result.data.token;
+                    localStorage.setItem('studentToken', authToken);
+                    showMessage('authMessage', 'Registration successful!', 'success');
+                    showDashboard();
+                    loadProfile();
+                } else {
+                    const errorMsg = result.errors ? 
+                        result.errors.map(err => err.msg).join(', ') : 
+                        result.message;
+                    showMessage('authMessage', errorMsg, 'error');
+                }
+            } catch (error) {
+                showMessage('authMessage', 'Registration failed: ' + error.message, 'error');
+            }
+        }
+
+        // Profile functions
+        async function loadProfile() {
+            try {
+                const response = await fetch(`${API_BASE}/profile`, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    displayProfile(result.data);
+                    populateForm(result.data);
+                } else {
+                    showMessage('profileMessage', result.message, 'error');
+                }
+            } catch (error) {
+                showMessage('profileMessage', 'Failed to load profile: ' + error.message, 'error');
+            }
+        }
+
+        async function handleProfileUpdate(e) {
+            e.preventDefault();
+            
+            const formData = new FormData();
+            
+            // Add text fields
+            const fields = ['cgpa', 'phoneNumber', 'rollNumber', 'attendance', 'backlogs'];
+            fields.forEach(field => {
+                const value = document.getElementById(field).value;
+                if (value) formData.append(field, value);
+            });
+            
+            // Add files
+            const profilePicture = document.getElementById('profilePicture').files[0];
+            if (profilePicture) formData.append('profilePicture', profilePicture);
+            
+            const cv = document.getElementById('cv').files[0];
+            if (cv) formData.append('cv', cv);
+            
+            const certificates = document.getElementById('certificates').files;
+            for (let i = 0; i < certificates.length; i++) {
+                formData.append('certificates', certificates[i]);
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}/profile`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage('profileMessage', 'Profile updated successfully!', 'success');
+                    displayProfile(result.data);
+                } else {
+                    const errorMsg = result.errors ? 
+                        result.errors.map(err => err.msg).join(', ') : 
+                        result.message;
+                    showMessage('profileMessage', errorMsg, 'error');
+                }
+            } catch (error) {
+                showMessage('profileMessage', 'Failed to update profile: ' + error.message, 'error');
+            }
+        }
+
+        // UI helper functions
+        function showDashboard() {
+            document.getElementById('loginSection').classList.add('hidden');
+            document.getElementById('dashboardSection').classList.remove('hidden');
+        }
+
+        function logout() {
+            localStorage.removeItem('studentToken');
+            authToken = null;
+            document.getElementById('loginSection').classList.remove('hidden');
+            document.getElementById('dashboardSection').classList.add('hidden');
+            document.getElementById('authMessage').innerHTML = '';
+        }
+
+        function showMessage(elementId, message, type) {
+            const element = document.getElementById(elementId);
+            element.innerHTML = `<div class="${type}">${message}</div>`;
+        }
+
+        function displayProfile(profile) {
+            const profileDiv = document.getElementById('profileData');
+            let html = `
+                <h4>Profile Information</h4>
+                <p><strong>Name:</strong> ${profile.fullName} (Non-editable)</p>
+                <p><strong>Email:</strong> ${profile.email} (Non-editable)</p>
+                <p><strong>Department:</strong> ${profile.department} (Non-editable)</p>
+                <p><strong>Semester:</strong> ${profile.semester} (Non-editable)</p>
+                <p><strong>Profile Completion:</strong> ${profile.profileCompletionPercentage}%</p>
+                <p><strong>CGPA:</strong> ${profile.cgpa || 'Not set'}</p>
+                <p><strong>Phone:</strong> ${profile.phoneNumber || 'Not set'}</p>
+                <p><strong>Roll Number:</strong> ${profile.rollNumber || 'Not set'}</p>
+                <p><strong>Attendance:</strong> ${profile.attendance ? profile.attendance + '%' : 'Not set'}</p>
+                <p><strong>Backlogs:</strong> ${profile.backlogs || 0}</p>
+            `;
+            
+            if (profile.profilePictureUrl) {
+                html += `<p><strong>Profile Picture:</strong><br><img src="${profile.profilePictureUrl}" alt="Profile" style="max-width: 150px; border-radius: 4px;"></p>`;
+            }
+            
+            if (profile.cv && profile.cv.url) {
+                html += `<p><strong>CV:</strong> <a href="${profile.cv.url}" target="_blank">${profile.cv.originalName}</a></p>`;
+            }
+            
+            if (profile.certificates && profile.certificates.length > 0) {
+                html += '<p><strong>Certificates:</strong></p><ul>';
+                profile.certificates.forEach(cert => {
+                    html += `<li><a href="${cert.url}" target="_blank">${cert.originalName}</a></li>`;
+                });
+                html += '</ul>';
+            }
+            
+            profileDiv.innerHTML = html;
+        }
+
+        function populateForm(profile) {
+            document.getElementById('cgpa').value = profile.cgpa || '';
+            document.getElementById('phoneNumber').value = profile.phoneNumber || '';
+            document.getElementById('rollNumber').value = profile.rollNumber || '';
+            document.getElementById('attendance').value = profile.attendance || '';
+            document.getElementById('backlogs').value = profile.backlogs || '';
+        }
+
+        // File preview functions
+        function previewProfilePicture(e) {
+            const file = e.target.files[0];
+            const preview = document.getElementById('profilePicturePreview');
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    preview.innerHTML = `<img src="${e.target.result}" alt="Profile Preview" style="max-width: 200px;">`;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.innerHTML = '';
+            }
+        }
+
+        function previewCV(e) {
+            const file = e.target.files[0];
+            const preview = document.getElementById('cvPreview');
+            if (file) {
+                preview.innerHTML = `<p>Selected: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)</p>`;
+            } else {
+                preview.innerHTML = '';
+            }
+        }
+
+        function previewCertificates(e) {
+            const files = e.target.files;
+            const preview = document.getElementById('certificatesPreview');
+            if (files.length > 0) {
+                let html = '<p>Selected files:</p><ul>';
+                for (let i = 0; i < files.length; i++) {
+                    html += `<li>${files[i].name} (${(files[i].size / 1024 / 1024).toFixed(2)} MB)</li>`;
+                }
+                html += '</ul>';
+                preview.innerHTML = html;
+            } else {
+                preview.innerHTML = '';
+            }
+        }
+    </script>
+</body>
+</html>

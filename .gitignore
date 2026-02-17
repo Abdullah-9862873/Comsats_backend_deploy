@@ -1,0 +1,26 @@
+# Node modules and caches
+node_modules/
+.npm/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Logs and runtime outputs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local storage/uploads
+uploads/
+public/uploads/
+
+# Builds and temp files
+.vercel/
+dist/
+*.tmp
+*.swp
+Thumbs.db
+Desktop.ini

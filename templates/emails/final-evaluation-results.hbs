@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Internship Evaluation Results</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9fafb;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        .header h1 {
+            color: #1f2937;
+            margin: 0;
+            font-size: 26px;
+            font-weight: 600;
+        }
+        .header p {
+            color: #6b7280;
+            margin: 8px 0 0 0;
+            font-size: 14px;
+        }
+        .congratulations {
+            text-align: center;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+        .grade-a-plus, .grade-a {
+            background-color: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+        .grade-b {
+            background-color: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #93c5fd;
+        }
+        .grade-c {
+            background-color: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fbbf24;
+        }
+        .grade-d, .grade-f {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+        .student-info {
+            background-color: #f8fafc;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 4px solid #3b82f6;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .detail-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .detail-label {
+            font-weight: 500;
+            color: #374151;
+        }
+        .detail-value {
+            color: #1f2937;
+            font-weight: 600;
+        }
+        .results-section {
+            background-color: #f1f5f9;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .total-marks {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e40af;
+            margin: 10px 0;
+        }
+        .grade-display {
+            font-size: 20px;
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .breakdown {
+            background-color: #f9fafb;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        .footer {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 12px;
+            margin-top: 30px;
+        }
+        strong {
+            font-weight: 600;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #e5e7eb;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Final Evaluation Results</h1>
+            <p>COMSATS University Islamabad - Internship Portal</p>
+        </div>
+
+        <!-- Grade-based Congratulations -->
+        {{#if (eq grade "A+")}}
+        <div class="congratulations grade-a-plus">
+            <h2>🎉 Outstanding Performance! Congratulations!</h2>
+            <p>You have achieved an exceptional grade of <strong>{{grade}}</strong> in your internship evaluation.</p>
+        </div>
+        {{else if (eq grade "A")}}
+        <div class="congratulations grade-a-plus">
+            <h2>🌟 Excellent Work! Congratulations!</h2>
+            <p>You have achieved an excellent grade of <strong>{{grade}}</strong> in your internship evaluation.</p>
+        </div>
+        {{else if (eq grade "A-")}}
+        <div class="congratulations grade-b">
+            <h2>👏 Great Job! Well Done!</h2>
+            <p>You have achieved a great grade of <strong>{{grade}}</strong> in your internship evaluation.</p>
+        </div>
+        {{else if (eq grade "B+")}}
+        <div class="congratulations grade-b">
+            <h2>👏 Great Job! Well Done!</h2>
+            <p>You have achieved a good grade of <strong>{{grade}}</strong> in your internship evaluation.</p>
+        </div>
+        {{else if (eq grade "B")}}
+        <div class="congratulations grade-b">
+            <h2>👏 Great Job! Well Done!</h2>
+            <p>You have achieved a good grade of <strong>{{grade}}</strong> in your internship evaluation.</p>
+        </div>
+        {{else if (eq grade "B-")}}
+        <div class="congratulations grade-b">
+            <h2>👏 Great Job! Well Done!</h2>
+            <p>You have achieved a good grade of <strong>{{grade}}</strong> in your internship evaluation.</p>
+        </div>
+        {{else if (eq grade "C+")}}
+        <div class="congratulations grade-c">
+            <h2>✅ Good Effort!</h2>
+            <p>You have completed your internship with a grade of <strong>{{grade}}</strong>.</p>
+        </div>
+        {{else if (eq grade "C")}}
+        <div class="congratulations grade-c">
+            <h2>✅ Good Effort!</h2>
+            <p>You have completed your internship with a grade of <strong>{{grade}}</strong>.</p>
+        </div>
+        {{else if (eq grade "C-")}}
+        <div class="congratulations grade-c">
+            <h2>✅ Good Effort!</h2>
+            <p>You have completed your internship with a grade of <strong>{{grade}}</strong>.</p>
+        </div>
+        {{else}}
+        <div class="congratulations grade-d">
+            <h2>📋 Evaluation Complete</h2>
+            <p>Your internship evaluation has been completed with a grade of <strong>{{grade}}</strong>.</p>
+        </div>
+        {{/if}}
+
+        <!-- Main Content -->
+        <div class="content">
+            <p><strong>Dear {{studentName}},</strong></p>
+            
+            <p>Your supervisor has completed your final internship evaluation. Below are your detailed results:</p>
+
+            <!-- Student Information -->
+            <div class="student-info">
+                <h3 style="margin-top: 0; color: #1f2937;">Student Information</h3>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Name:</span>
+                    <span class="detail-value">{{studentName}}</span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Registration Number:</span>
+                    <span class="detail-value">{{studentRollNo}}</span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Department:</span>
+                    <span class="detail-value">{{studentDepartment}}</span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Company:</span>
+                    <span class="detail-value">{{companyName}}</span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Position:</span>
+                    <span class="detail-value">{{jobTitle}}</span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Supervisor:</span>
+                    <span class="detail-value">{{supervisorName}}</span>
+                </div>
+            </div>
+
+            <!-- Final Results -->
+            <div class="results-section">
+                <h3 style="margin-top: 0; color: #1f2937;">Final Results</h3>
+                
+                <div class="total-marks">
+                    Total Score: {{totalMarks}}/100
+                </div>
+                
+                <div class="grade-display {{#if (eq grade "A+")}}grade-a-plus{{else if (eq grade "A")}}grade-a-plus{{else if (eq grade "A-")}}grade-b{{else if (eq grade "B+")}}grade-b{{else if (eq grade "B")}}grade-b{{else if (eq grade "B-")}}grade-b{{else if (eq grade "C+")}}grade-c{{else if (eq grade "C")}}grade-c{{else if (eq grade "C-")}}grade-c{{else}}grade-d{{/if}}">
+                    Grade: {{grade}}
+                </div>
+            </div>
+
+            <!-- Evaluation Breakdown -->
+            <div class="breakdown">
+                <h4 style="margin-top: 0; color: #374151;">Evaluation Breakdown</h4>
+                
+                <div class="breakdown-item">
+                    <span><strong>Supervisor Evaluation (60%):</strong></span>
+                    <span><strong>{{supervisorMarks}}/60</strong></span>
+                </div>
+                
+                <div class="breakdown-item">
+                    <span><strong>Company Evaluation (40%):</strong></span>
+                    <span><strong>{{companyMarks}}/40</strong></span>
+                </div>
+                
+                <hr style="margin: 10px 0;">
+                
+                <div class="breakdown-item">
+                    <span><strong>Final Total:</strong></span>
+                    <span style="color: #1e40af;"><strong>{{totalMarks}}/100</strong></span>
+                </div>
+            </div>
+
+            <p><strong>Next Steps:</strong></p>
+            <p>You can view and download your detailed evaluation report from your student dashboard. This evaluation marks the completion of your internship program.</p>
+
+            <p>Congratulations on completing your internship! We wish you all the best in your future endeavors.</p>
+
+            <p><strong>Best regards,</strong><br>
+            {{supervisorName}}<br>
+            COMSATS Internship Portal</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>This is an automated notification from the COMSATS Internship Portal.</p>
+            <p>For any queries, please contact your supervisor or the internship coordination office.</p>
+            <p>&copy; {{currentYear}} COMSATS University Islamabad. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

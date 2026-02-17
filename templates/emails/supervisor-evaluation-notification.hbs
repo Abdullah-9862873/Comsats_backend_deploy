@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internee Evaluation Notification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #2563eb;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #2563eb;
+            margin: 0;
+            font-size: 24px;
+        }
+        .header p {
+            color: #666;
+            margin: 5px 0 0 0;
+            font-size: 14px;
+        }
+        .content {
+            margin-bottom: 30px;
+        }
+        .evaluation-details {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-left: 4px solid #2563eb;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .student-details {
+            background-color: #ecfdf5;
+            padding: 20px;
+            border-left: 4px solid #10b981;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .company-details {
+            background-color: #fef3c7;
+            padding: 20px;
+            border-left: 4px solid #f59e0b;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .detail-row {
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .detail-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .marks-highlight {
+            background-color: #dbeafe;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            margin: 20px 0;
+            border: 1px solid #93c5fd;
+        }
+        .footer {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            color: #666;
+            font-size: 12px;
+        }
+        strong {
+            font-weight: bold;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #e5e7eb;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Student Evaluation Completed</h1>
+            <p>COMSATS University Islamabad - Internship Portal</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <p><strong>Dear {{supervisorName}},</strong></p>
+            
+            <p>We hope this email finds you well. We are writing to inform you that a company has completed the internship evaluation for one of your supervised students.</p>
+
+            <hr>
+
+            <!-- Student Information -->
+            <div class="student-details">
+                <p><strong>📚 Student Information:</strong></p>
+                
+                <div class="detail-row">
+                    <strong>Student Name:</strong> {{studentName}}
+                </div>
+                
+                <div class="detail-row">
+                    <strong>Registration Number:</strong> {{studentRollNo}}
+                </div>
+                
+                <div class="detail-row">
+                    <strong>Department:</strong> {{studentDepartment}}
+                </div>
+                
+                <div class="detail-row">
+                    <strong>Email:</strong> {{studentEmail}}
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- Company Information -->
+            <div class="company-details">
+                <p><strong>🏢 Company Information:</strong></p>
+                
+                <div class="detail-row">
+                    <strong>Company Name:</strong> {{companyName}}
+                </div>
+                
+                <div class="detail-row">
+                    <strong>Position:</strong> {{jobTitle}}
+                </div>
+                
+                <div class="detail-row">
+                    <strong>Evaluation Date:</strong> {{evaluationDate}}
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- Evaluation Results -->
+            <div class="marks-highlight">
+                <p><strong>Evaluation Results</strong></p>
+                <p style="font-size: 18px; margin: 10px 0;"><strong>Total Marks: {{totalMarks}}/{{maxMarks}}</strong></p>
+                <p style="font-size: 16px; color: #2563eb;"><strong>Percentage: {{percentage}}%</strong></p>
+            </div>
+
+            {{#if supervisorComments}}
+            <hr>
+            
+            <div class="evaluation-details">
+                <p><strong>Company Comments:</strong></p>
+                <p style="font-style: italic; color: #555;">{{supervisorComments}}</p>
+            </div>
+            {{/if}}
+
+            <hr>
+
+            <p><strong>Next Steps:</strong></p>
+            <p>You can review the detailed evaluation results in your supervisor dashboard. This evaluation will contribute to the student's final internship assessment.</p>
+
+            <p>If you have any questions or concerns about this evaluation, please contact the company directly or reach out to the internship coordination office.</p>
+
+            <p><strong>Best regards,</strong><br>
+            COMSATS Internship Portal Team</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>This is an automated notification from the COMSATS Internship Portal.</p>
+            <p>Please do not reply to this email. For support, contact the internship office.</p>
+            <p>&copy; {{currentYear}} COMSATS University Islamabad. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

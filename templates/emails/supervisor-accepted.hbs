@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Supervisor Selection Confirmation - COMSATS Internship Portal</title>
+    <style type="text/css">
+        /* Reset styles */
+        body, table, td, p, a, li, blockquote {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+        table, td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+        img {
+            -ms-interpolation-mode: bicubic;
+            border: 0;
+            outline: none;
+            text-decoration: none;
+        }
+        
+        /* Base styles */
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            background-color: #f8fafc !important;
+            font-family: Arial, sans-serif !important;
+        }
+        
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .logo {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 0 auto 20px;
+            width: 200px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .logo-text {
+            color: #059669;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        
+        .logo-subtitle {
+            color: #10b981;
+            font-size: 10px;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+        
+        .header h1 {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+        }
+        
+        .header p {
+            color: #d1fae5;
+            font-size: 16px;
+            margin: 0;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .celebration-icon {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .celebration-circle {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: bold;
+            box-shadow: 0 6px 20px rgba(5, 150, 105, 0.3);
+        }
+        
+        .greeting {
+            font-size: 20px;
+            color: #1f2937;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        .message {
+            font-size: 16px;
+            color: #4b5563;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .supervisor-card {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .supervisor-card h3 {
+            color: #059669;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .supervisor-info {
+            color: #065f46;
+            font-size: 14px;
+            margin: 8px 0;
+        }
+        
+        .next-steps {
+            background-color: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .next-steps h3 {
+            color: #1e40af;
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .next-steps ul {
+            color: #1e40af;
+            font-size: 14px;
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .next-steps li {
+            margin: 8px 0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+        }
+        
+        .footer {
+            background-color: #f9fafb;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .footer p {
+            color: #6b7280;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <div class="logo-text">COMSATS</div>
+                <div class="logo-subtitle">UNIVERSITY</div>
+            </div>
+            <h1>Congratulations!</h1>
+            <p>Your Supervisor Request Has Been Accepted</p>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            <!-- Celebration Icon -->
+            <div class="celebration-icon">
+                <div class="celebration-circle">🎉</div>
+            </div>
+            
+            <div class="greeting">
+                Excellent News, {{studentName}}!
+            </div>
+            
+            <div class="message">
+                We're thrilled to inform you that your supervision request has been <strong>accepted</strong>! 
+                {{supervisorName}} has agreed to be your academic supervisor for your internship journey.
+            </div>
+            
+            <!-- Supervisor Details Card -->
+            <div class="supervisor-card">
+                <h3>Your Assigned Supervisor</h3>
+                <div class="supervisor-info"><strong>Name:</strong> {{supervisorName}}</div>
+                <div class="supervisor-info"><strong>Department:</strong> {{supervisorDepartment}}</div>
+                <div class="supervisor-info"><strong>Email:</strong> {{supervisorEmail}}</div>
+                {{#if supervisorPhone}}
+                <div class="supervisor-info"><strong>Phone:</strong> {{supervisorPhone}}</div>
+                {{/if}}
+                <div class="supervisor-info"><strong>Office:</strong> {{supervisorOffice}}</div>
+            </div>
+            
+            <div class="message">
+                This is an important milestone in your academic journey! Your supervisor will guide you through 
+                the internship process, help you with job applications, and provide valuable mentorship.
+            </div>
+            
+            <!-- Next Steps -->
+            <div class="next-steps">
+                <h3>What's Next?</h3>
+                <ul>
+                    <li><strong>Contact Your Supervisor:</strong> Reach out to introduce yourself and discuss your goals</li>
+                    <li><strong>Schedule a Meeting:</strong> Arrange your first supervision meeting</li>
+                    <li><strong>Job Applications:</strong> You can now start applying for internship positions</li>
+                    <li><strong>Regular Check-ins:</strong> Maintain regular communication with your supervisor</li>
+                </ul>
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="{{portalUrl}}" class="cta-button">Access Your Portal</a>
+            </div>
+            
+            <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
+            
+            
+            <div style="font-size: 14px; color: #6b7280; text-align: center; margin-top: 30px;">
+                Best wishes for your internship journey!<br>
+                <strong>COMSATS Internship Portal Team</strong>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>COMSATS Internship Portal</strong></p>
+            <p>This is an automated notification. Please do not reply to this email.</p>
+            <p>For support, contact your supervisor or the internship coordinator.</p>
+            <p style="margin-top: 15px; font-size: 12px;">
+                © 2025 COMSATS University. All rights reserved.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
